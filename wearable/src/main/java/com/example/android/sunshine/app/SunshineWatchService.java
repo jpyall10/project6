@@ -601,7 +601,7 @@ public class SunshineWatchService extends CanvasWatchFaceService {
 
                         } catch (Exception e) {
                             Log.e(TAG, "Exception   ", e);
-                            weatherForecastIcon = null;
+                            //weatherForecastIcon = null;
                         }
 
                     } else {
