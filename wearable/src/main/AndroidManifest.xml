@@ -24,16 +24,16 @@
                 android:resource="@xml/watch_face" />
             <meta-data
                 android:name="com.google.android.wearable.watchface.preview"
-                android:resource="@drawable/preview_digital" />
+                android:resource="@drawable/preview_sunshine" />
             <meta-data
                 android:name="com.google.android.wearable.watchface.preview_circular"
-                android:resource="@drawable/preview_digital_circular" />
-            <meta-data
-                android:name="com.google.android.wearable.watchface.companionConfigurationAction"
-                android:value="com.example.android.sunshine.app.CONFIG_DIGITAL" />
-            <meta-data
-                android:name="com.google.android.wearable.watchface.wearableConfigurationAction"
-                android:value="com.example.android.sunshine.app.CONFIG_DIGITAL" />
+                android:resource="@drawable/preview_sunshine_circular" />
+            <!--<meta-data-->
+                <!--android:name="com.google.android.wearable.watchface.companionConfigurationAction"-->
+                <!--android:value="com.example.android.sunshine.app.CONFIG_DIGITAL" />-->
+            <!--<meta-data-->
+                <!--android:name="com.google.android.wearable.watchface.wearableConfigurationAction"-->
+                <!--android:value="com.example.android.sunshine.app.CONFIG_DIGITAL" />-->
 
             <intent-filter>
                 <action android:name="android.service.wallpaper.WallpaperService" />

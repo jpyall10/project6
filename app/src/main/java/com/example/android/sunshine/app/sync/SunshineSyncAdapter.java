@@ -410,6 +410,7 @@ public class SunshineSyncAdapter extends AbstractThreadedSyncAdapter {
     }
 
     private void notifyWeather() {
+        Log.d(LOG_TAG, "notifyWeather ran");
         Context context = getContext();
         //checking the last update and notify if it' the first of the day
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
@@ -422,7 +423,7 @@ public class SunshineSyncAdapter extends AbstractThreadedSyncAdapter {
             String lastNotificationKey = context.getString(R.string.pref_last_notification);
             long lastSync = prefs.getLong(lastNotificationKey, 0);
 
-            if (System.currentTimeMillis() - lastSync >= DAY_IN_MILLIS) {
+//            if (System.currentTimeMillis()- lastSync >= DAY_IN_MILLIS) { //System.currentTimeMillis()- lastSync >= DAY_IN_MILLIS
                 // Last sync was more than 1 day ago, let's send a notification with the weather.
                 String locationQuery = Utility.getPreferredLocation(context);
 
@@ -508,18 +509,17 @@ public class SunshineSyncAdapter extends AbstractThreadedSyncAdapter {
 
                     //Sync with wearable device
                     syncWear(largeIcon, high, low);
-
+                    Log.d(LOG_TAG, "syncWear should have run");
                     //refreshing last sync
                     SharedPreferences.Editor editor = prefs.edit();
                     editor.putLong(lastNotificationKey, System.currentTimeMillis());
                     editor.commit();
                 }
                 cursor.close();
-            }
+//            }
         }
     }
 
-    /* CODE FROM: https://github.com/kushalsharma/sunshine-wear/blob/master/app/src/main/java/com/example/android/sunshine/app/sync/SunshineSyncAdapter.java*/
     private void syncWear(Bitmap largeIcon, double high, double low) {
         Context context = getContext();
         final GoogleApiClient mGoogleApiClient;
@@ -563,7 +563,7 @@ public class SunshineSyncAdapter extends AbstractThreadedSyncAdapter {
         putDataMapRequest.getDataMap().putAsset(WEATHER_FORECAST_ICON_KEY, icon);
         putDataMapRequest.getDataMap().putLong("timestamp", System.currentTimeMillis());
 
-        PutDataRequest request = putDataMapRequest.asPutDataRequest();
+        PutDataRequest request = putDataMapRequest.asPutDataRequest().setUrgent();
         Wearable.DataApi.putDataItem(mGoogleApiClient, request).setResultCallback(new ResultCallback<DataApi.DataItemResult>() {
             @Override
             public void onResult(DataApi.DataItemResult dataItemResult) {
@@ -617,7 +617,7 @@ public class SunshineSyncAdapter extends AbstractThreadedSyncAdapter {
                 new String[]{locationSetting},
                 null);
 
-        if (locationCursor.moveToFirst()) {
+        if (locationCursor.moveToFirst() && locationCursor != null) {
             int locationIdIndex = locationCursor.getColumnIndex(WeatherContract.LocationEntry._ID);
             locationId = locationCursor.getLong(locationIdIndex);
         } else {

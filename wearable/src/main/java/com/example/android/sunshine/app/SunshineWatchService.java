@@ -57,10 +57,7 @@ import java.util.Locale;
 import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
-/**
- * Analog watch face with a ticking second hand. In ambient mode, the second hand isn't shown. On
- * devices with low-bit ambient mode, the hands are drawn without anti-aliasing in ambient mode.
- */
+
 public class SunshineWatchService extends CanvasWatchFaceService {
     private static final String TAG = "SunshineWatchService";
 
@@ -464,7 +461,6 @@ public class SunshineWatchService extends CanvasWatchFaceService {
             mShouldDrawColons = (System.currentTimeMillis() % 1000) < 500;
 
             // Draw the background.
-            Log.d("background", "about to draw background " + mBackgroundPaint.toString());
             canvas.drawRect(0, 0, bounds.width(), bounds.height(), mBackgroundPaint);
 
 
@@ -541,7 +537,7 @@ public class SunshineWatchService extends CanvasWatchFaceService {
                         (x - mHiLowPaint.measureText(weatherTempHigh)/2)-mLowPaint.measureText(weatherTempLow)/2, y + mLineHeight*2 + mYOffset, mLowPaint);
 
                 // Forecast Icon
-                if(!isInAmbientMode() && !mMute){
+                if(!isInAmbientMode() && !mMute && weatherForecastIcon!=null){
                     try{
                         canvas.drawBitmap(weatherForecastIcon,
 //                                xWeather + mHiLowPaint.measureText(weatherTempHigh),mYOffset + mLineHeight * 0.65f, null);
@@ -601,7 +597,7 @@ public class SunshineWatchService extends CanvasWatchFaceService {
 
                         } catch (Exception e) {
                             Log.e(TAG, "Exception   ", e);
-                            //weatherForecastIcon = null;
+                            weatherForecastIcon = null;
                         }
 
                     } else {
@@ -655,7 +651,6 @@ public class SunshineWatchService extends CanvasWatchFaceService {
                 Log.d(TAG, "onConnected: " + connectionHint);
             }
             Wearable.DataApi.addListener(mGoogleApiClient, Engine.this);
-            //updateConfigDataItemAndUiOnStartup();
         }
 
         @Override  // GoogleApiClient.ConnectionCallbacks
