@@ -1,5 +1,11 @@
 Removed API key from gradle.properties and google-services.json from app/ folder
 
+Watch face seems to be working properly when location is changed in the app the first time
+It does not change for me after that first time. I have tried countless things and thought maybe
+there really is just a problem on my end or maybe the review will find my error. It seems right 
+to me. I have had a one on one and a forum discussion and nothing has completely solved my problem
+yet. It is so frustrating because the app was working perfectly about 2 weeks ago.
+
 Advanced Android Sample App
 ===================================
 
