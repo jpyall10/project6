@@ -1,3 +1,5 @@
+Removed API key from gradle.properties and google-services.json from app/ folder
+
 Advanced Android Sample App
 ===================================
 
